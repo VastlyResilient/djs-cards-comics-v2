@@ -149,7 +149,233 @@ body{background:#F4F1FA;color:#1A1030;font-family:Archivo,sans-serif;-webkit-fon
   <div class="gift"><b>5 · The note to your web person</b> — a short, friendly brief so you can delegate everything with one forward.</div>
  </div>
  <div class="srcnote">Each artifact is complete in the appendix — no brackets, no "we'll fill this in later." Not sure what to do with one? Forward it to whoever manages your website — the note is written for them.</div>
-</div></section><section class="slide dark" data-label="Close"><div class="pad close-pad">
+</div></section><section class="slide" data-label="Your Business, Scannable" style="position:relative">
+ <div id="voxel-djs" style="position:absolute;inset:0"></div>
+ <div style="position:absolute;top:36px;left:48px;z-index:10;pointer-events:none">
+   <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d42b1e;font-weight:700;margin-bottom:10px">Your business, in 3D — and one scan away</div>
+   <div style="font-family:Fraunces,serif;font-size:clamp(26px,3.4vw,46px);line-height:1.05;color:#F5EFE6;max-width:520px">This is you. <em style="color:#d42b1e">Drag it.</em> The roof becomes a code your next customer can scan to reach us.</div>
+ </div>
+ <div style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:13px;letter-spacing:.12em;color:rgba(245,239,230,.6);z-index:10;pointer-events:none">DRAG TO ORBIT · THE ROOF BECOMES A SCANNABLE CODE</div>
+ <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+ <script>(function(){ function init(){
+   var mount = document.getElementById('voxel-djs');
+   if(!mount || mount.dataset.done) return; mount.dataset.done='1';
+   const THREE = window.THREE;
+
+
+
+function buildVoxelScene(mount, cfg) {
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(cfg.bg);
+  scene.fog = new THREE.Fog(cfg.bg, 30, 90);
+
+  const camera = new THREE.PerspectiveCamera(42, mount.clientWidth/mount.clientHeight, 0.1, 300);
+  camera.position.set(16, 14, 20);
+
+  const renderer = new THREE.WebGLRenderer({antialias:true, alpha:false});
+  renderer.setSize(mount.clientWidth, mount.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  mount.appendChild(renderer.domElement);
+
+  // lightweight drag-orbit (no external dep): drag to orbit around the building
+  const orbit = { theta: 0.0, phi: 1.05, radius: 32, dragging: false, lx:0, ly:0 };
+  const dom = renderer.domElement;
+  dom.style.cursor = 'grab';
+  function orbitUpdate(){
+    orbit.phi = Math.max(0.15, Math.min(1.45, orbit.phi));      // clamp top/side
+    orbit.radius = Math.max(14, Math.min(48, orbit.radius));
+    const t = { x:1, y:6, z:0 };
+    camera.position.set(
+      t.x + orbit.radius*Math.sin(orbit.phi)*Math.sin(orbit.theta),
+      t.y + orbit.radius*Math.cos(orbit.phi),
+      t.z + orbit.radius*Math.sin(orbit.phi)*Math.cos(orbit.theta));
+    camera.lookAt(t.x,t.y,t.z);
+  }
+  dom.addEventListener('pointerdown', e=>{ orbit.dragging=true; orbit.lx=e.clientX; orbit.ly=e.clientY; dom.style.cursor='grabbing'; if(window.__onDrag)__onDrag(true); });
+  window.addEventListener('pointermove', e=>{ if(!orbit.dragging)return; orbit.theta -= (e.clientX-orbit.lx)*0.006; orbit.phi -= (e.clientY-orbit.ly)*0.006; orbit.lx=e.clientX; orbit.ly=e.clientY; });
+  window.addEventListener('pointerup', ()=>{ orbit.dragging=false; dom.style.cursor='grab'; if(window.__onDrag)__onDrag(false); });
+  dom.addEventListener('wheel', e=>{ e.preventDefault(); orbit.radius += e.deltaY*0.02; }, {passive:false});
+  orbitUpdate();
+
+  // lights
+  const hemi = new THREE.HemisphereLight(0xfff4e0, 0x2a1a10, 0.9); scene.add(hemi);
+  const sun = new THREE.DirectionalLight(0xffe0b0, 1.4);
+  sun.position.set(18, 30, 12); sun.castShadow = true;
+  sun.shadow.mapSize.set(2048,2048);
+  sun.shadow.camera.left=-30; sun.shadow.camera.right=30; sun.shadow.camera.top=30; sun.shadow.camera.bottom=-30;
+  scene.add(sun);
+  const rim = new THREE.DirectionalLight(cfg.accent, 0.5); rim.position.set(-15,10,-15); scene.add(rim);
+
+  // ground
+  const ground = new THREE.Mesh(new THREE.CylinderGeometry(26,26,1,48), new THREE.MeshStandardMaterial({color:cfg.ground, roughness:0.95}));
+  ground.position.y = -0.5; ground.receiveShadow = true; scene.add(ground);
+
+  const V = 1; // voxel unit
+  const group = new THREE.Group(); scene.add(group);
+  const mats = {};
+  function mat(c){ if(!mats[c]) mats[c]=new THREE.MeshStandardMaterial({color:c, roughness:0.8}); return mats[c]; }
+  function box(x,y,z,w,h,d,c){ const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat(c)); m.position.set(x,y,z); m.castShadow=true; m.receiveShadow=true; group.add(m); return m; }
+
+  // ---- BUILDING (voxel, stepped) ----
+  const B = cfg.building;
+  // main block
+  box(0, B.h/2, 0, B.w, B.h, B.d, B.wall);
+  // cornice / trim
+  box(0, B.h+0.4, 0, B.w+1, 0.8, B.d+1, B.trim);
+  // door
+  box(0, 1.6, B.d/2+0.05, 2.2, 3.2, 0.3, B.door);
+  // windows (front)
+  for (let i=-1;i<=1;i++){ box(i*3.2, B.h*0.42, B.d/2+0.05, 1.8, 1.8, 0.3, B.glass); }
+  // awning
+  box(0, 3.6, B.d/2+0.9, B.w*0.7, 0.3, 1.8, B.awning);
+
+  // ---- COMPANY NAME on building (voxel letters, front face) ----
+  // simple 3x5 voxel font
+  const FONT = {
+   'A':["010","101","111","101","101"],'B':["110","101","110","101","110"],'C':["011","100","100","100","011"],
+   'D':["110","101","101","101","110"],'E':["111","100","111","100","111"],'F':["111","100","111","100","100"],
+   'G':["011","100","101","101","011"],'H':["101","101","111","101","101"],'I':["111","010","010","010","111"],
+   'J':["011","001","001","101","010"],'K':["101","110","100","110","101"],'L':["100","100","100","100","111"],
+   'M':["101","111","111","101","101"],'N':["101","111","111","111","101"],'O':["111","101","101","101","111"],
+   'P':["111","101","111","100","100"],'Q':["111","101","101","111","001"],'R':["111","101","111","110","101"],
+   'S':["011","100","010","001","110"],'T':["111","010","010","010","010"],'U':["101","101","101","101","111"],
+   'V':["101","101","101","101","010"],'W':["101","101","111","111","101"],'X':["101","101","010","101","101"],
+   'Y':["101","101","010","010","010"],'Z':["111","001","010","100","111"],' ':["000","000","000","000","000"],
+   "'":["010","010","000","000","000"],'&':["010","101","010","101","011"],'1':["010","110","010","010","111"],
+   '9':["011","101","011","001","010"],'.':["000","000","000","000","010"]
+  };
+  function drawText(text, y, z, scale, color){
+    let cx = -(text.length*4*scale)/2;
+    for (const ch of text.toUpperCase()){
+      const g = FONT[ch]||FONT[' '];
+      for (let r=0;r<5;r++) for (let c=0;c<3;c++){
+        if (g[r][c]==='1') box(cx + c*scale, y + (4-r)*scale, z, scale*0.92, scale*0.92, scale*0.8, color);
+      }
+      cx += 4*scale;
+    }
+  }
+  // sign band behind the name for contrast
+  box(0, B.h*0.68 + 2*cfg.nameScale, B.d/2+0.08, Math.min(B.w*0.96, cfg.name.length*4*cfg.nameScale+1.2), 6.4*cfg.nameScale, 0.2, B.trim);
+  drawText(cfg.name, B.h*0.68, B.d/2+0.4, cfg.nameScale, cfg.nameColor);
+
+  // ---- BRAND ASSET (voxel) beside the building ----
+  if (cfg.asset && ASSETS[cfg.asset]) ASSETS[cfg.asset](box, mat, group);
+
+  // ---- ROOF -> QR morph ----
+  const qr = cfg.qr; // {size, matrix}
+  const roofGroup = new THREE.Group(); group.add(roofGroup);
+  const roofTiles = [];
+  const N = qr.size; const t = Math.min(B.w, B.d) / (N+4);
+  const startX = -(N*t)/2, startZ = -(N*t)/2;
+  for (let r=0;r<N;r++) for (let c=0;c<N;c++){
+    const on = qr.matrix[r][c]===1;
+    const tile = new THREE.Mesh(new THREE.BoxGeometry(t*0.92,0.3,t*0.92),
+      new THREE.MeshStandardMaterial({color: on?cfg.qrDark:cfg.qrLight, roughness:0.6}));
+    // initial: flat roof plane (hidden as roof), target: raised QR pattern
+    tile.position.set(startX + c*t + t/2, B.h+0.8, startZ + r*t + t/2);
+    tile.castShadow = true; roofGroup.add(tile);
+    roofTiles.push({mesh:tile, on, baseY:B.h+0.8, qrY: B.h+0.8 + (on?1.2:0)});
+  }
+  // label
+  const qrLabel = makeLabel("Scan to book your free audit", cfg.accent);
+  qrLabel.position.set(0, B.h+4.5, 0); qrLabel.visible=false; scene.add(qrLabel);
+
+  function makeLabel(text, color){
+    const cv=document.createElement('canvas'); cv.width=512; cv.height=64;
+    const ctx=cv.getContext('2d'); ctx.fillStyle='#000'; ctx.globalAlpha=0.6; ctx.fillRect(0,0,512,64);
+    ctx.globalAlpha=1; ctx.fillStyle='#fff'; ctx.font='bold 30px Archivo,sans-serif'; ctx.textAlign='center'; ctx.fillText(text,256,42);
+    const tx=new THREE.CanvasTexture(cv);
+    const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tx, transparent:true}));
+    sp.scale.set(10,1.25,1); return sp;
+  }
+
+  // drag -> morph
+  let morph = 0, target = 0, dragging=false;
+  window.__onDrag = (d)=>{ dragging=d; target = d?1:0; };
+
+  function animate(){
+    requestAnimationFrame(animate);
+    morph += (target-morph)*0.08;
+    // ease camera toward top-down when QR is shown so it's scannable
+    const phiTarget = target>0.5 ? 0.22 : 1.05;
+    orbit.phi += (phiTarget-orbit.phi)*0.05;
+    for (const t2 of roofTiles){
+      t2.mesh.position.y = t2.baseY + (t2.qrY - t2.baseY)*morph;
+      t2.mesh.material.color.lerpColors(new THREE.Color(cfg.trim), new THREE.Color(t2.on?cfg.qrDark:cfg.qrLight), morph);
+    }
+    qrLabel.visible = morph>0.5;
+    orbitUpdate();
+    renderer.render(scene,camera);
+  }
+  animate();
+
+  window.addEventListener('resize', ()=>{
+    camera.aspect = mount.clientWidth/mount.clientHeight; camera.updateProjectionMatrix();
+    renderer.setSize(mount.clientWidth, mount.clientHeight);
+  });
+}
+
+
+// ---- VOXEL BRAND ASSETS ----
+const ASSETS = {
+  pizza(box, mat, group){
+    // a voxel pizza slice on a plate beside the building
+    const px=9, pz=4;
+    // plate
+    box(px, 0.3, pz, 5, 0.4, 5, 0xE8E0D0);
+    // crust (ring)
+    const R=2;
+    for (let a=0;a<16;a++){ const ang=a/16*Math.PI*2; box(px+Math.cos(ang)*R, 0.8, pz+Math.sin(ang)*R, 0.7,0.6,0.7, 0xC88A4A); }
+    // cheese
+    box(px, 0.7, pz, 3.2, 0.4, 3.2, 0xF0C050);
+    // sauce/pepperoni
+    box(px-0.8,0.95,pz-0.6, 0.6,0.2,0.6, 0xB3402A); box(px+0.9,0.95,pz+0.4, 0.6,0.2,0.6, 0xB3402A); box(px+0.2,0.95,pz-1.0, 0.6,0.2,0.6, 0xB3402A);
+    // basil
+    box(px-0.3,1.0,pz+0.8, 0.4,0.2,0.4, 0x1A7A3A);
+  },
+  cards(box, mat, group){
+    // a fanned stack of trading cards + a comic burst
+    const px=9, pz=4;
+    for (let i=0;i<5;i++){ const c=box(px+i*0.3, 1.2+i*0.05, pz-i*0.2, 2.2, 3, 0.15, [0xD42B1E,0x2A4A8A,0xF0C050,0x1A7A3A,0x8a4aB0][i]); c.rotation.z = -0.2 + i*0.1; }
+    // starburst behind
+    box(px+1, 3.5, pz-1, 0.5,1.5,0.5, 0xF0C050); box(px+1, 3.5, pz-1, 1.5,0.5,0.5, 0xF0C050);
+  },
+  music(box, mat, group){
+    // a voxel music note (quaver)
+    const px=9, pz=4;
+    // note head
+    box(px, 1.0, pz, 1.4, 1.0, 1.0, 0xB38A20);
+    // stem
+    box(px+0.6, 2.8, pz, 0.3, 3.0, 0.3, 0xB38A20);
+    // flag
+    box(px+1.1, 4.0, pz, 1.0, 0.3, 0.3, 0xB38A20); box(px+1.5, 3.7, pz, 0.3, 0.9, 0.3, 0xB38A20);
+    // second note
+    box(px+2.2, 0.9, pz+0.5, 1.2, 0.9, 0.9, 0xE8D9A8); box(px+2.7, 2.4, pz+0.5, 0.3, 2.6, 0.3, 0xE8D9A8);
+  },
+  car(box, mat, group){
+    // a voxel executive sedan
+    const px=9, pz=4;
+    // body
+    box(px, 1.0, pz, 5, 1.0, 2.2, 0x1a1a1a);
+    // cabin
+    box(px-0.3, 1.8, pz, 2.8, 0.9, 2.0, 0x2a2a2a);
+    // windows
+    box(px-0.3, 1.8, pz+1.0, 2.4, 0.6, 0.1, 0x8ab0d0);
+    // wheels
+    box(px-1.6,0.5,pz+1.1, 0.8,0.8,0.3, 0x0a0a0a); box(px+1.6,0.5,pz+1.1, 0.8,0.8,0.3, 0x0a0a0a);
+    box(px-1.6,0.5,pz-1.1, 0.8,0.8,0.3, 0x0a0a0a); box(px+1.6,0.5,pz-1.1, 0.8,0.8,0.3, 0x0a0a0a);
+    // headlights
+    box(px+2.5,1.0,pz+0.7, 0.2,0.3,0.4, 0xF0F0C0); box(px+2.5,1.0,pz-0.7, 0.2,0.3,0.4, 0xF0F0C0);
+  }
+};
+
+   var cfg = {"bg": 1312798, "ground": 1708080, "accent": 13904670, "name": "DJ'S", "nameScale": 0.6, "nameColor": 15788792, "building": {"w": 11, "h": 10, "d": 9, "wall": 3820154, "trim": 13904670, "door": 1708080, "glass": 10535167, "awning": 13904670}, "qr": {"url": "https://vastlyresilient.github.io/seolution-book/?ref=djs-cards-comics", "size": 37, "matrix": [[1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1], [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1], [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1], [0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0], [1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1], [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1], [1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1], [0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0], [1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1], [1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1], [1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0], [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0], [0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0], [1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1], [0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0], [1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0], [1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0], [1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1], [1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0], [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0], [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0], [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1]]}, "qrDark": 1312798, "qrLight": 15788792, "asset": "cards"};
+   buildVoxelScene(mount, cfg);
+ } if(window.THREE){ init(); } else { var t=setInterval(function(){ if(window.THREE){ clearInterval(t); init(); } },50); } })();</script>
+</section>
+<section class="slide dark" data-label="Close"><div class="pad close-pad">
  <div class="kick2 light">DJ's team —</div>
  <h2 class="h2 light">North Haven's card shop since 1991 <em>should be its most findable.</em></h2>
  <p class="close-b">Everything in this deck is yours, whether or not we ever talk. If you'd like us to do the hour a week for you, reply or call. Either way, we'll re-check these searches on 2026-09-24 and send you what changed — free.</p>

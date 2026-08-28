@@ -392,10 +392,21 @@ function cafeSet(x, z, accent){
   const P=accent||0xB3402A;
   [[0,0],[-0.55,0],[0.55,0],[0,-0.55],[0,0.55]].forEach(p=>box(x+p[0], 3.0, z+p[1], 0.6, 0.14, 0.6, P));
 }
+
+// subtle ground shadow under props — dark plane, no depth write
+function groundShadow(x, z, w, d) {
+  box(x, 0.02, z, w, 0.04, d, 0x0a0a0a, {shadow: false, opacity: 0.4});
+}
+
 // street lamp with glow
 function lampPost(x, z){
   box(x, 1.5, z, 0.18, 3.0, 0.18, 0x2a2a2a);
   box(x, 3.15, z, 0.5, 0.35, 0.5, 0xffd9a0, {shadow:false});
+}
+
+// Subtle ground shadow under props (dark, flat, no shadow casting)
+function groundShadow(x, z, w, d) {
+  box(x, 0.02, z, w, 0.04, d, 0x1a1a1a, {shadow: false});
 }
 
 
@@ -404,6 +415,12 @@ const PURPLE=0x6a4a9a, PURPLED=0x4a2a6a, LAV=0x9a8ac0, RED=0xD42B1E, GOLD=0xd8a0
       DARK=0x1a1028, GLASSW=0xffc966, WHITE=0xf8f4ec, CREAM=0xF5EFE6, BLACK=0x1a1a1a;
 
 qrPlaza();
+
+// Ground shadow helper
+function groundShadow(x, z, w, d) {
+  box(x, 0.08, z, w, 0.06, d, 0x0a0a0a, {shadow:false});
+}
+
 
 const W=14, D=10, H=12;
 // Ground floor
@@ -538,7 +555,9 @@ box(0, 3.6, -D/2-0.28, 3.4, 0.8, 0.18, PURPLE);
 
 // ===== STREET LIFE =====
 planter(-W/2-1.5, D/2-0.8, PURPLE, 0x2f7a3a);
+groundShadow(-W/2-1.5, D/2-0.8, 1.2, 1.2);
 planter( W/2+1.5, D/2-0.8, PURPLE, 0x2f7a3a);
+groundShadow(W/2+1.5, D/2-0.8, 1.2, 1.2);
 minifig(-W/2-2.5, D/2+1.0, PURPLE, 0x2a2a2a);
 minifig(-W/2-4.0, D/2+3.0, 0x2a4a9a, 0x2a2a2a);
 minifig( W/2+2.5, D/2+1.5, RED, 0x2a3a5a);
@@ -548,7 +567,8 @@ lampPost( W/2+6.5, D/2+0.5);
 // Comic long boxes stacked near entrance
 box(W/2+1.5, 0.4, D/2+1.5, 1.2, 0.8, 0.6, WHITE);
 box(W/2+1.5, 1.2, D/2+1.5, 1.1, 0.7, 0.55, 0xe9e2d5);
-// Card hero: fanned trading cards on pedestal
+// Card hero: fanned trading cards
+groundShadow(W/2+3.0, D/2+4.0, 3.0, 3.0); on pedestal
 box(W/2+3.0, 0.5, D/2+4.0, 2.6, 1.0, 2.6, 0x3a3a3a);
 {
   const cards=[RED,0x2a4a9a,0x2a7a2a,GOLD,0xe86a2a];

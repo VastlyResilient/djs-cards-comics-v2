@@ -159,7 +159,7 @@ body{background:#F4F1FA;color:#1A1030;font-family:Archivo,sans-serif;-webkit-fon
  <script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
  <script>(function(){
    var built=false;
-   var CFG = {"bg": 1707816, "accent": 6965914, "theta": 0.3, "phi": 0.78, "radius": 42, "target": {"x": 0, "y": 5, "z": 2}, "qr": {"url": "https://vastlyresilient.github.io/seolution-book/?ref=djs-cards-comics", "size": 37, "matrix": [[1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1], [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1], [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1], [0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0], [1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1], [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1], [1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1], [0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0], [1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1], [1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1], [1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0], [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0], [0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0], [1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1], [0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0], [1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0], [1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0], [1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1], [1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0], [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0], [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0], [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1]]}};
+   var CFG = {"bg": 1707816, "accent": 6965914, "theta": 0.3, "phi": 0.78, "radius": 38, "target": {"x": 0, "y": 4, "z": 2}, "qr": {"url": "https://vastlyresilient.github.io/seolution-book/?ref=djs-cards-comics", "size": 37, "matrix": [[1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1], [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1], [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1], [0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0], [1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1], [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1], [1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1], [0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0], [1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1], [1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1], [1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0], [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0], [0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0], [1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1], [0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0], [1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0], [1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0], [1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1], [1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0], [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0], [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0], [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1]]}};
    function build(){
      var mount=document.getElementById('voxel-djs');
      if(!mount) return;
@@ -196,23 +196,15 @@ function buildVoxelScene(mount, cfg){
   const geoStud = new THREE.CylinderGeometry(0.34,0.34,0.2,16);
   const world = new THREE.Group(); scene.add(world);
   function brick(x,y,z, w,d,h, color, opts={}){
-    // w,d in studs; h in plates (1 plate=0.4, 1 brick=1.2). Studs on top.
+    // Micro-voxel: clean planar faces, NO studs. w,d,h in world units.
     const g = new THREE.Group();
-    const bodyH = h;
     const body = new THREE.Mesh(geoBox, mat(color, opts.mat||{}));
-    body.scale.set(w, bodyH, d); body.castShadow=true; body.receiveShadow=true;
+    body.scale.set(w, h, d); body.castShadow=true; body.receiveShadow=true;
     g.add(body);
-    if(opts.studs!==false){
-      for(let i=0;i<w;i++) for(let j=0;j<d;j++){
-        const s = new THREE.Mesh(geoStud, mat(color, opts.mat||{}));
-        s.position.set(-w/2 + 0.5 + i, bodyH/2 + 0.1, -d/2 + 0.5 + j);
-        s.castShadow = opts.studShadow!==false;
-        g.add(s);
-      }
-    }
-    g.position.set(x, y, z); world.add(g); return g;
-  }
-  // plain box (for interior/details, no studs)
+    g.position.set(x, y+h/2, z);
+    world.add(g);
+    return g;
+  }  // plain box (for interior/details, no studs)
   function box(x,y,z, w,h,d, color, opts={}){
     const m = new THREE.Mesh(geoBox, mat(color, opts.mat||{}));
     m.scale.set(w,h,d); m.position.set(x,y,z);
@@ -262,7 +254,10 @@ function buildVoxelScene(mount, cfg){
 
      CFG.build = function(ctx){ var brick=ctx.brick, box=ctx.box, mat=ctx.mat, world=ctx.world, cfg=ctx.cfg; var qr=cfg.qr;
 
-// ============ VOXEL COMMON v2 — density toolkit ============
+// ============ VOXEL COMMON v3 — MICRO-VOXEL ARCHITECTURAL DIORAMA ============
+// Style: CINEMATIC MICRO-VOXEL — NOT LEGO, NOT Minecraft, NOT low-poly
+// No studs. Small modules. Architecture first. Real materials.
+
 const F5 = {
  'A':["0110","1001","1001","1111","1001","1001","1001"],'B':["1110","1001","1110","1001","1001","1001","1110"],
  'C':["0111","1000","1000","1000","1000","1000","0111"],'D':["1110","1001","1001","1001","1001","1001","1110"],
@@ -276,13 +271,15 @@ const F5 = {
  'S':["0111","1000","1000","0110","0001","0001","1110"],'T':["11111","00100","00100","00100","00100","00100","00100"],
  'U':["1001","1001","1001","1001","1001","1001","0110"],'V':["1001","1001","1001","1001","1001","1001","0101"],
  'W':["10001","10001","10001","10101","10101","11011","10001"],'X':["1001","1001","0110","0110","0110","1001","1001"],
- 'Y':["1001","1001","0110","0010","0010","0010","0010"],'Z':["1111","0001","0010","0100","1000","1000","1111"],
+ 'Y':["1001","1001","0110","0010","0010","0010","0010","0010"],'Z':["1111","0001","0010","0100","1000","1000","1111"],
  "'":["010","010","000","000","000","000","000"],'&':["0110","1001","0100","0101","1001","1001","0111"],
  '1':["010","110","010","010","010","010","111"],'9':["0110","1001","1001","0111","0001","0001","0110"],
  '0':["0110","1001","1011","1101","1001","1001","0110"],'5':["1111","1000","1110","0001","0001","1001","0110"],
  '+':["0000","0010","0010","111","0010","0010","0000"],' ':[]
 };
 function glyphCols(text){ let t=0; for(const ch of text){ const g=F5[ch]; t += (g&&g[0]?g[0].length:2)+1.5; } return t-1.5; }
+
+// Micro-voxel text — small scale, painted fascia style
 function drawName(text, y, z, scale, color, depth){
   let total=0; for(const ch of text){ const g=F5[ch]; total += (g&&g[0]?g[0].length:2)*scale + scale*1.5; } total -= scale*1.5;
   let cx=-total/2;
@@ -291,21 +288,24 @@ function drawName(text, y, z, scale, color, depth){
     if(!g||!g[0]){ cx+=2*scale; continue; }
     const gw=g[0].length;
     for(let r=0;r<g.length;r++) for(let c=0;c<gw;c++)
-      if(g[r][c]==='1') box(cx+c*scale, y+(g.length-1-r)*scale, z, scale*0.94, scale*0.94, depth||0.5, color, {shadow:false});
+      if(g[r][c]==='1') box(cx+c*scale, y+(g.length-1-r)*scale, z, scale*0.88, scale*0.88, depth||0.3, color, {shadow:false});
     cx += (gw+1.5)*scale;
   }
 }
-// pixel-glyph painter: rows of strings, on=onColor boxes (cx,cy center, cell size, z depth, face 'front'|'sideR')
+
+// Pixel glyph painter — for icons, murals, heroes
 function paintGlyph(rows, cx, cy, z, cell, palette, face){
   const w=rows[0].length, h=rows.length;
   for(let r=0;r<h;r++) for(let c=0;c<w;c++){
     const ch=rows[r][c]; if(ch==='.'||ch===' ') continue;
     const col=palette[ch]||palette['#']; if(col==null) continue;
     const px=cx+(c-w/2+0.5)*cell, py=cy+(h/2-r-0.5)*cell;
-    if(face==='sideR') box(z, py, -px, cell*0.5, cell*0.94, cell*0.94, col, {shadow:false});
-    else box(px, py, z, cell*0.94, cell*0.94, cell*0.5, col, {shadow:false});
+    if(face==='sideR') box(z, py, -px, cell*0.5, cell*0.88, cell*0.88, col, {shadow:false});
+    else box(px, py, z, cell*0.88, cell*0.88, cell*0.5, col, {shadow:false});
   }
 }
+
+// QR ground plaza — clean, flat, scannable
 function qrPlaza(){
   const N=qr.size, tile=0.8, off=-N*tile/2;
   for(let r=0;r<N;r++) for(let c=0;c<N;c++){
@@ -314,22 +314,35 @@ function qrPlaza(){
   }
   box(0,-0.15,0, N*tile+4, 0.25, N*tile+4, 0xe9e2d5, {shadow:false});
 }
-// scalloped striped awning: alternating stripes + hanging scallop row
-function awningStripes(cx, y, z, w, depth, c1, c2){
-  const n=Math.max(6, Math.round(w/0.9));
-  for(let i=0;i<n;i++){
-    const col=i%2?c1:c2;
-    box(cx-w/2+(i+0.5)*(w/n), y, z+depth/2, w/n*0.96, 0.28, depth, col);
-    box(cx-w/2+(i+0.5)*(w/n), y-0.34, z+depth-0.1, w/n*0.96, 0.42, 0.16, col); // scallop hang
+
+// Micro-brick facade — dense small tiles with tone variation
+function microBrickFace(cx, cy, cz, w, h, color, face){
+  const tile=0.5, nx=Math.ceil(w/tile), ny=Math.ceil(h/tile);
+  for(let i=0;i<nx;i++) for(let j=0;j<ny;j++){
+    const tone = (i+j)%3===0 ? color : (i+j)%3===1 ? shade(color,0.9) : shade(color,1.1);
+    const px = cx - w/2 + (i+0.5)*tile, py = cy - h/2 + (j+0.5)*tile;
+    if(face==='sideR') box(cz, py, -px, 0.15, tile*0.92, tile*0.92, tone, {shadow:false});
+    else box(px, py, cz, tile*0.92, tile*0.92, 0.15, tone, {shadow:false});
   }
 }
-// sandwich board (A-frame) with 3-4 short word lines
-function sandwichBoard(x, z, lines, scale, fg, bg, rotY){
+
+// Awning with stepped voxel folds
+function awningStripes(cx, y, z, w, depth, c1, c2){
+  const n=Math.max(8, Math.round(w/0.6));
+  for(let i=0;i<n;i++){
+    const col=i%2?c1:c2;
+    box(cx-w/2+(i+0.5)*(w/n), y, z+depth/2, w/n*0.96, 0.22, depth, col);
+    box(cx-w/2+(i+0.5)*(w/n), y-0.28, z+depth-0.08, w/n*0.96, 0.35, 0.12, col);
+  }
+}
+
+// Sandwich board
+function sandwichBoard(x, z, lines, scale, fg, bg){
   const w=lines.reduce((a,l)=>Math.max(a,glyphCols(l)),0)*scale+scale*2.4;
   const h=lines.length*8.5*scale+scale*2;
-  box(x, h/2+0.15, z, w, h, 0.18, bg, {shadow:true});
-  box(x, h/2+0.15, z-0.3, w, h, 0.18, bg, {shadow:true});
-  box(x, 0.15, z-0.15, w*1.05, 0.3, 0.7, 0x2a2a2a);
+  box(x, h/2+0.15, z, w, h, 0.15, bg, {shadow:true});
+  box(x, h/2+0.15, z-0.25, w, h, 0.15, bg, {shadow:true});
+  box(x, 0.15, z-0.12, w*1.05, 0.3, 0.5, 0x2a2a2a);
   lines.forEach((ln,i)=>{
     const tw=glyphCols(ln)*scale;
     let cx2=x-tw/2;
@@ -338,243 +351,177 @@ function sandwichBoard(x, z, lines, scale, fg, bg, rotY){
       if(!g||!g[0]){ cx2+=2*scale; continue; }
       const gw=g[0].length;
       for(let r=0;r<g.length;r++) for(let c=0;c<gw;c++)
-        if(g[r][c]==='1') box(cx2+c*scale, h-scale*1.4-(i*8.5+r)*scale, z+0.13, scale*0.9, scale*0.9, 0.12, fg, {shadow:false});
+        if(g[r][c]==='1') box(cx2+c*scale, h-scale*1.4-(i*8.5+r)*scale, z+0.11, scale*0.85, scale*0.85, 0.1, fg, {shadow:false});
       cx2+=(gw+1.5)*scale;
     }
   });
 }
-// voxel minifig person
+
+// Voxel person — small, clean
 function minifig(x, z, shirt, pants, skin){
   skin=skin||0xd9a06b;
-  box(x, 0.55, z, 0.5, 1.1, 0.34, pants);              // legs
-  box(x, 1.55, z, 0.78, 0.95, 0.42, shirt);            // torso
-  box(x, 2.28, z, 0.5, 0.5, 0.5, skin);                // head
-  box(x-0.52, 1.55, z, 0.24, 0.8, 0.3, shirt);         // arms
-  box(x+0.52, 1.55, z, 0.24, 0.8, 0.3, shirt);
+  box(x, 0.5, z, 0.45, 1.0, 0.3, pants);
+  box(x, 1.4, z, 0.7, 0.85, 0.38, shirt);
+  box(x, 2.05, z, 0.45, 0.45, 0.45, skin);
+  box(x-0.45, 1.4, z, 0.2, 0.7, 0.25, shirt);
+  box(x+0.45, 1.4, z, 0.2, 0.7, 0.25, shirt);
 }
-// delivery/service van with side wordmark
+
+// Vehicle — clean, no studs, brand-colored
 function van(x, z, body, wordmark, wmColor, scale){
   scale=scale||1;
-  box(x, 1.0*scale, z, 4.6*scale, 1.4*scale, 2.2*scale, body);              // lower body
-  box(x-0.6*scale, 2.1*scale, z, 3.4*scale, 0.9*scale, 2.2*scale, body);    // cargo top
-  box(x+1.75*scale, 1.9*scale, z, 1.1*scale, 0.7*scale, 2.0*scale, 0xbfe3ff, {shadow:false}); // windshield
-  [[-1.5,-1.05],[1.5,-1.05],[-1.5,1.05],[1.5,1.05]].forEach(p=>{
-    box(x+p[0]*scale, 0.42*scale, z+p[1]*scale, 0.84*scale, 0.84*scale, 0.3*scale, 0x1a1a1a);
+  box(x, 0.9*scale, z, 4.2*scale, 1.2*scale, 2.0*scale, body);
+  box(x-0.5*scale, 1.9*scale, z, 3.0*scale, 0.8*scale, 2.0*scale, body);
+  box(x+1.6*scale, 1.7*scale, z, 1.0*scale, 0.6*scale, 1.8*scale, 0xbfe3ff, {shadow:false});
+  [[-1.3,-0.9],[1.3,-0.9],[-1.3,0.9],[1.3,0.9]].forEach(p=>{
+    box(x+p[0]*scale, 0.35*scale, z+p[1]*scale, 0.7*scale, 0.7*scale, 0.25*scale, 0x1a1a1a);
   });
-  if(wordmark){ // wordmark on side facing +z
-    const s=0.16*scale, tw=glyphCols(wordmark)*s;
+  if(wordmark){
+    const s=0.14*scale, tw=glyphCols(wordmark)*s;
     let cx2=x-tw/2;
     for(const ch of wordmark){
       const g=F5[ch];
       if(!g||!g[0]){ cx2+=2*s; continue; }
       const gw=g[0].length;
       for(let r=0;r<g.length;r++) for(let c=0;c<gw;c++)
-        if(g[r][c]==='1') box(cx2+c*s, 1.15*scale+(g.length-1-r)*s, z+1.12*scale, s*0.9, s*0.9, 0.06, wmColor||0xffffff, {shadow:false});
+        if(g[r][c]==='1') box(cx2+c*s, 1.0*scale+(g.length-1-r)*s, z+1.05*scale, s*0.85, s*0.85, 0.05, wmColor||0xffffff, {shadow:false});
       cx2+=(gw+1.5)*s;
     }
   }
 }
-// planter with shrub
+
+// Planter
 function planter(x, z, pot, leaf){
-  box(x, 0.35, z, 0.9, 0.7, 0.9, pot||0x7a4a2a);
-  box(x, 1.05, z, 0.7, 0.8, 0.7, leaf||0x2f7a3a);
-  box(x, 1.65, z, 0.4, 0.4, 0.4, leaf||0x2f7a3a);
+  box(x, 0.3, z, 0.8, 0.6, 0.8, pot||0x7a4a2a);
+  box(x, 0.9, z, 0.6, 0.7, 0.6, leaf||0x2f7a3a);
+  box(x, 1.4, z, 0.35, 0.35, 0.35, leaf||0x2f7a3a);
 }
-// cafe table + 2 chairs + parasol
+
+// Cafe set — small, clean
 function cafeSet(x, z, accent){
-  box(x, 0.75, z, 1.3, 0.12, 1.3, 0xe9e2d5);            // tabletop
-  box(x, 0.38, z, 0.16, 0.75, 0.16, 0x3a3a3a);          // stem
-  box(x-1.1, 0.45, z, 0.7, 0.1, 0.7, 0x6a4a2a);         // chairs
-  box(x+1.1, 0.45, z, 0.7, 0.1, 0.7, 0x6a4a2a);
-  box(x-1.1, 0.22, z, 0.14, 0.45, 0.14, 0x3a3a3a);
-  box(x+1.1, 0.22, z, 0.14, 0.45, 0.14, 0x3a3a3a);
-  box(x, 1.9, z, 0.12, 2.4, 0.12, 0x3a3a3a);            // parasol stem
-  const P=accent||0xB3402A;
-  [[0,0],[-0.55,0],[0.55,0],[0,-0.55],[0,0.55]].forEach(p=>box(x+p[0], 3.0, z+p[1], 0.6, 0.14, 0.6, P));
+  box(x, 0.65, z, 1.1, 0.1, 1.1, 0xe9e2d5);
+  box(x, 0.32, z, 0.14, 0.65, 0.14, 0x3a3a3a);
+  box(x-0.9, 0.4, z, 0.6, 0.09, 0.6, 0x6a4a2a);
+  box(x+0.9, 0.4, z, 0.6, 0.09, 0.6, 0x6a4a2a);
+  box(x-0.9, 0.18, z, 0.12, 0.4, 0.12, 0x3a3a3a);
+  box(x+0.9, 0.18, z, 0.12, 0.4, 0.12, 0x3a3a3a);
+  box(x, 1.7, z, 0.1, 2.0, 0.1, 0x3a3a3a);
+  const P=accent||0xC33A22;
+  [[0,0],[-0.45,0],[0.45,0],[0,-0.45],[0,0.45]].forEach(p=>box(x+p[0], 2.6, z+p[1], 0.5, 0.12, 0.5, P));
 }
 
-// subtle ground shadow under props — dark plane, no depth write
-function groundShadow(x, z, w, d) {
-  box(x, 0.02, z, w, 0.04, d, 0x0a0a0a, {shadow: false, opacity: 0.4});
-}
-
-// street lamp with glow
+// Lamp post
 function lampPost(x, z){
-  box(x, 1.5, z, 0.18, 3.0, 0.18, 0x2a2a2a);
-  box(x, 3.15, z, 0.5, 0.35, 0.5, 0xffd9a0, {shadow:false});
+  box(x, 1.3, z, 0.16, 2.6, 0.16, 0x2a2a2a);
+  box(x, 2.7, z, 0.45, 0.3, 0.45, 0xffd9a0, {shadow:false});
 }
 
-// Subtle ground shadow under props (dark, flat, no shadow casting)
-function groundShadow(x, z, w, d) {
-  box(x, 0.02, z, w, 0.04, d, 0x1a1a1a, {shadow: false});
+// Ground shadow
+function groundShadow(x, z, w, d){
+  box(x, 0.02, z, w, 0.04, d, 0x1a1a1a, {shadow:false});
+}
+
+// Helper: shade a color
+function shade(col, f){
+  const r=Math.min(255,Math.floor(((col>>16)&0xff)*f)), g=Math.min(255,Math.floor(((col>>8)&0xff)*f)), b=Math.min(255,Math.floor((col&0xff)*f));
+  return (r<<16)|(g<<8)|b;
 }
 
 
-// ===== DJ'S CARDS & COMICS — comic shop, purple theme =====
 const PURPLE=0x6a4a9a, PURPLED=0x4a2a6a, LAV=0x9a8ac0, RED=0xD42B1E, GOLD=0xd8a03a,
       DARK=0x1a1028, GLASSW=0xffc966, WHITE=0xf8f4ec, CREAM=0xF5EFE6, BLACK=0x1a1a1a;
-
 qrPlaza();
+const W=14, D=10, H=8;
+brick(0, 0.15, 0, W, D, 0.3, 0x3a3a3a);
+microBrickFace(0, H/2+0.15, D/2+0.05, W, H-0.3, 0x3a3a3a, 'front');
+microBrickFace(0, H/2+0.15, -D/2-0.05, W, H-0.3, 0x2a2a2a, 'front');
+microBrickFace(W/2+0.05, H/2+0.15, 0, D, H-0.3, 0x2a2a2a, 'sideR');
+microBrickFace(-W/2-0.05, H/2+0.15, 0, D, H-0.3, 0x2a2a2a, 'sideR');
+brick(0, 0.3, 0, W-0.4, D-0.4, H-0.6, 0x1a1a1a);
+brick(0, H+0.1, 0, W+0.4, D+0.4, 0.5, 0x1a1a1a);
+brick(0, H+0.5, 0, W+0.2, D+0.2, 0.3, 0x0a0a0a);
+brick(-W/2+2, H+0.9, -D/2+2, 1.2, 1.0, 1.8, 0x2a2a2a);
+box(W/2-2.5, H+0.8, -D/2+2.5, 1.0, 0.7, 1.2, 0x9aa0a6);
 
-// Ground shadow helper
-function groundShadow(x, z, w, d) {
-  box(x, 0.08, z, w, 0.06, d, 0x0a0a0a, {shadow:false});
-}
+// Sign band
+box(0, H-2.2, D/2+0.15, W*0.9, 2.0, 0.3, PURPLE);
+box(0, H-2.2, D/2+0.18, W*0.9-0.2, 1.7, 0.32, PURPLED, {shadow:false});
+drawName("DJ'S", H-2.8, D/2+0.35, 0.3, WHITE, 0.25);
+drawName("CARDS & COMICS", H-3.2, D/2+0.35, 0.12, LAV, 0.2);
+// Comic burst glyph
+const BURST=["...#...","..#.#..",".#.#.#.","..###..",".#####.","..###..",".#.#.#.","..#.#..","...#..."];
+paintGlyph(BURST, 4.4, H-2.2, D/2+0.32, 0.16, {'#':RED}, 'front');
 
+// Comic murals flanking sign
+box(-W/2+0.6, H-2.2, D/2+0.2, 1.8, 1.8, 0.12, 0x1a1a2a);
+const SPIDEY=["..rrrr..",".rrrrrr.",".rbbbbr.",".rbbbbr.","..bbbb..","..bbbb..",".rbbbbr.",".rbbbbr.","..rrrr.."];
+paintGlyph(SPIDEY, -W/2+0.6, H-2.2, D/2+0.28, 0.14, {'r':RED,'b':0x2a4a9a}, 'front');
+box(W/2-0.6, H-2.2, D/2+0.2, 1.8, 1.8, 0.12, 0x1a1a2a);
+const HULK=["..gggg..",".gggggg.",".gggggg.",".gbbbbg.","..bbbb..","..bbbb..",".gggggg.",".gggggg.","..gggg.."];
+paintGlyph(HULK, W/2-0.6, H-2.2, D/2+0.28, 0.14, {'g':0x2a7a2a,'b':0x2a2a2a}, 'front');
 
-const W=14, D=10, H=12;
-// Ground floor
-brick(0, 0.2, 0, W, D, 4.5, 0x3a3a3a);
-// Sign band level
-brick(0, 4.7, 0, W, D, 3.3, 0x2a2a2a);
-// Upper level
-brick(0, 8.2, 0, W, D, 2.8, 0x3a3a3a);
-// Parapet
-brick(0, 11.1, 0, W+0.6, D+0.6, 0.9, 0x1a1a1a, {studs:false});
-// Roof
-box(-W/2+2.5, 12.0, -D/2+2, 1.4,1.4,2.0, 0x2a2a2a);
-box(W/2-2.8, 11.9, -D/2+2.5, 1.2,0.9,1.4, 0x9aa0a6);
-box(-0.5, 11.85, -D/2+3, 2.2,0.3,1.5, 0xbfe3ff, {shadow:false});
+awningStripes(0, H-4.0, D/2, W*0.8, 2.2, PURPLE, 0x2a2a2a);
 
-// ===== SIGN BAND — dark with purple border, comic-book style =====
-box(0, 6.4, D/2+0.45, W*0.98, 2.8, 0.9, 0x1a1a2a);
-box(0, 6.4, D/2+0.48, W*0.98-0.3, 2.45, 0.95, PURPLE, {shadow:false});
-// DJ'S in big white letters
-drawName("DJ'S", 5.55, D/2+0.95, 0.42, WHITE, 0.65);
-// CARDS & COMICS in purple below
-drawName("CARDS & COMICS", 4.95, D/2+0.95, 0.14, LAV, 0.5);
-// Comic burst glyph — right side (POW! style)
-const BURST=[
- "....#....",
- "..#.#.#..",
- ".#..#..#.",
- "..#####..",
- "#.#####.#",
- "..#####..",
- ".#..#..#.",
- "..#.#.#..",
- "....#....",
-];
-paintGlyph(BURST, 4.8, 6.35, D/2+0.92, 0.22, {'#':RED,'.':null}, 'front');
-
-// ===== COMIC COVER MURALS — flanking the sign band (like reference) =====
-// Left mural: Spider-Man-ish red/blue
-box(-W/2+0.8, 6.4, D/2+0.3, 2.2, 2.4, 0.15, 0x1a1a2a);
-const SPIDEY=[
- "..rrrr..",
- ".rrrrrr.",
- ".rbbbbr.",
- ".rbbbbr.",
- "..bbbb..",
- "..bbbb..",
- ".rbbbb r.",
- ".rbbbb r.",
- "..rrrr..",
-];
-paintGlyph(SPIDEY, -W/2+0.8, 6.4, D/2+0.42, 0.2, {'r':RED,'b':0x2a4a9a}, 'front');
-
-// Right mural: Hulk-ish green
-box(W/2-0.8, 6.4, D/2+0.3, 2.2, 2.4, 0.15, 0x1a1a2a);
-const HULK=[
- "..gggg..",
- ".gggggg.",
- ".gggggg.",
- ".gbbbbg.",
- "..bbbb..",
- "..bbbb..",
- ".gggggg.",
- ".gggggg.",
- "..gggg..",
-];
-paintGlyph(HULK, W/2-0.8, 6.4, D/2+0.42, 0.2, {'g':0x2a7a2a,'b':0x2a2a2a}, 'front');
-
-// ===== AWNING — purple/black striped =====
-{
-  const aw=W*0.85, n=10, z=D/2;
-  for(let i=0;i<n;i++){
-    const col=i%2?PURPLE:0x2a2a2a, sx=-aw/2+(i+0.5)*(aw/n);
-    box(sx, 4.55, z+1.5, aw/n*0.98, 0.25, 3.0, col);
-    box(sx, 4.0, z+2.85, aw/n*0.98, 0.85, 0.2, col);
-  }
-}
-
-// ===== STOREFRONT — comic book displays =====
-// Left window: comic book wall (colorful grid)
-box(-3.2, 2.2, D/2+0.12, 3.6, 3.6, 0.14, GLASSW, {shadow:false});
+// Storefront
+box(-3.0, 1.8, D/2+0.1, 3.2, 3.0, 0.12, GLASSW, {shadow:false});
 {
   const comics=[RED,0x2a4a9a,0x2a7a2a,GOLD,0xe86a2a,0x9a4a9a];
   for(let r=0;r<3;r++) for(let c=0;c<4;c++)
-    box(-4.2+c*0.65, 1.4+r*0.9, D/2-0.4, 0.5, 0.7, 0.15, comics[(r*4+c)%6], {shadow:false});
+    box(-4.0+c*0.55, 1.2+r*0.75, D/2-0.35, 0.45, 0.6, 0.12, comics[(r*4+c)%6], {shadow:false});
 }
-box(-3.2, 2.2, D/2+0.2, 3.8, 0.16, 0.1, DARK, {shadow:false});
-box(-3.2, 2.2, D/2+0.2, 0.16, 3.7, 0.1, DARK, {shadow:false});
-box(-3.2, 2.2, D/2+0.2, 3.8, 3.7, 0.06, DARK, {shadow:false});
-box(-3.2, 0.35, D/2+0.3, 3.8, 0.3, 0.5, CREAM);
+box(-3.0, 1.8, D/2+0.16, 3.4, 0.12, 0.08, DARK, {shadow:false});
+box(-3.0, 1.8, D/2+0.16, 0.12, 3.1, 0.08, DARK, {shadow:false});
+box(-3.0, 0.25, D/2+0.2, 3.4, 0.2, 0.4, CREAM);
 
-// Right window: card display case + action figures
-box(3.4, 2.2, D/2+0.12, 3.2, 3.6, 0.14, GLASSW, {shadow:false});
-box(3.4, 1.1, D/2-0.4, 2.4, 0.7, 0.5, 0x2a2a2a, {shadow:false});   // display case
-box(2.8, 1.7, D/2-0.4, 0.5, 0.6, 0.3, RED, {shadow:false});         // figure
-box(4.0, 1.7, D/2-0.4, 0.5, 0.6, 0.3, 0x2a4a9a, {shadow:false});    // figure
-box(3.4, 2.2, D/2+0.2, 3.4, 0.16, 0.1, DARK, {shadow:false});
-box(3.4, 2.2, D/2+0.2, 0.16, 3.7, 0.1, DARK, {shadow:false});
-box(3.4, 2.2, D/2+0.2, 3.4, 3.7, 0.06, DARK, {shadow:false});
-box(3.4, 0.35, D/2+0.3, 3.4, 0.3, 0.5, CREAM);
+box(3.2, 1.8, D/2+0.1, 2.8, 3.0, 0.12, GLASSW, {shadow:false});
+box(3.2, 1.0, D/2-0.35, 2.0, 0.6, 0.4, 0x2a2a2a, {shadow:false});
+box(2.6, 1.5, D/2-0.35, 0.4, 0.5, 0.25, RED, {shadow:false});
+box(3.8, 1.5, D/2-0.35, 0.4, 0.5, 0.25, 0x2a4a9a, {shadow:false});
+box(3.2, 1.8, D/2+0.16, 3.0, 0.12, 0.08, DARK, {shadow:false});
+box(3.2, 1.8, D/2+0.16, 0.12, 3.1, 0.08, DARK, {shadow:false});
+box(3.2, 0.25, D/2+0.2, 3.0, 0.2, 0.4, CREAM);
 
-// Purple door
-box(0, 2.2, D/2+0.1, 1.8, 4.4, 0.22, PURPLE);
-box(0, 2.9, D/2+0.24, 1.1, 1.6, 0.1, GLASSW, {shadow:false});
-box(0.55, 2.0, D/2+0.28, 0.1, 0.5, 0.08, GOLD, {shadow:false});
-box(0, 0.25, D/2+0.5, 2.2, 0.22, 1.0, 0x9aa0a6);
+box(0, 1.9, D/2+0.08, 1.6, 3.8, 0.18, PURPLE);
+box(0, 2.5, D/2+0.2, 1.0, 1.4, 0.08, GLASSW, {shadow:false});
+box(0.5, 1.8, D/2+0.24, 0.08, 0.4, 0.06, GOLD, {shadow:false});
+box(0, 0.2, D/2+0.4, 1.8, 0.18, 0.8, 0x9aa0a6);
 
-// ===== UPPER LEVEL — 3 windows with purple frames =====
-[-4.2,0,4.2].forEach(wx=>{
-  box(wx, 9.6, D/2+0.1, 1.8, 2.4, 0.12, GLASSW, {shadow:false});
-  box(wx-1.15, 9.6, D/2+0.14, 0.45, 2.5, 0.1, PURPLE, {shadow:false});
-  box(wx+1.15, 9.6, D/2+0.14, 0.45, 2.5, 0.1, PURPLE, {shadow:false});
-  box(wx, 8.2, D/2+0.25, 2.0, 0.3, 0.45, 0x2a2a2a);
-});
-
-// ===== SIDE WALL — "BUY SELL TRADE COLLECT" (verified from deck) =====
+// Side wall: BUY SELL TRADE COLLECT
 {
-  const words=["BUY","SELL","TRADE","COLLECT"], s=0.24;
+  const words=["BUY","SELL","TRADE","COLLECT"], s=0.18;
   words.forEach((word,wi)=>{
-    const tw=glyphCols(word)*s; let cz=-tw/2;
+    const tw=glyphCols(word)*s; let cz=-tw/2+0.3;
     for(const ch of word){
       const g=F5[ch]; if(!g||!g[0]){cz+=2*s;continue;} const gw=g[0].length;
       for(let r=0;r<g.length;r++) for(let c=0;c<gw;c++)
-        if(g[r][c]==='1') box(W/2+0.35, 10.0-wi*2.0+(g.length-1-r)*s, cz+c*s, 0.5, s*0.88, s*0.88, LAV, {shadow:false});
+        if(g[r][c]==='1') box(W/2+0.25, 6.0-wi*1.8+(g.length-1-r)*s, cz+c*s, 0.25, s*0.85, s*0.85, LAV, {shadow:false});
       cz+=(gw+1.5)*s;
     }
   });
 }
 
-// ===== REAR =====
-box(0, 1.4, -D/2-0.12, 2.2, 2.8, 0.26, 0x4a4a4a);
-box(0, 3.6, -D/2-0.28, 3.4, 0.8, 0.18, PURPLE);
+// Rear
+box(0, 1.2, -D/2-0.1, 2.0, 2.4, 0.2, 0x4a4a4a);
+box(0, 2.8, -D/2-0.2, 2.8, 0.6, 0.15, PURPLE);
 
-// ===== STREET LIFE =====
-planter(-W/2-1.5, D/2-0.8, PURPLE, 0x2f7a3a);
-groundShadow(-W/2-1.5, D/2-0.8, 1.2, 1.2);
-planter( W/2+1.5, D/2-0.8, PURPLE, 0x2f7a3a);
-groundShadow(W/2+1.5, D/2-0.8, 1.2, 1.2);
-minifig(-W/2-2.5, D/2+1.0, PURPLE, 0x2a2a2a);
-minifig(-W/2-4.0, D/2+3.0, 0x2a4a9a, 0x2a2a2a);
-minifig( W/2+2.5, D/2+1.5, RED, 0x2a3a5a);
-sandwichBoard(-4.5, D/2+4.0, ["NEW","COMICS"], 0.14, PURPLE, WHITE);
-lampPost(-W/2-6.5, D/2+0.5);
-lampPost( W/2+6.5, D/2+0.5);
-// Comic long boxes stacked near entrance
-box(W/2+1.5, 0.4, D/2+1.5, 1.2, 0.8, 0.6, WHITE);
-box(W/2+1.5, 1.2, D/2+1.5, 1.1, 0.7, 0.55, 0xe9e2d5);
-// Card hero: fanned trading cards
-groundShadow(W/2+3.0, D/2+4.0, 3.0, 3.0); on pedestal
-box(W/2+3.0, 0.5, D/2+4.0, 2.6, 1.0, 2.6, 0x3a3a3a);
+// Street
+planter(-W/2-1.2, D/2-0.6, PURPLE, 0x2f7a3a);
+planter( W/2+1.2, D/2-0.6, PURPLE, 0x2f7a3a);
+minifig(-W/2-2.0, D/2+0.8, PURPLE, 0x2a2a2a);
+minifig(-W/2-3.5, D/2+2.5, 0x2a4a9a, 0x2a2a2a);
+minifig( W/2+2.0, D/2+1.0, RED, 0x2a3a5a);
+sandwichBoard(-4.0, D/2+3.0, ["NEW","COMICS"], 0.11, PURPLE, WHITE);
+lampPost(-W/2-5.5, D/2+0.3);
+lampPost( W/2+5.5, D/2+0.3);
+box(W/2+1.2, 0.35, D/2+1.2, 1.0, 0.7, 0.5, WHITE);
+box(W/2+1.2, 0.95, D/2+1.2, 0.9, 0.6, 0.45, 0xe9e2d5);
+// Card hero
+box(W/2+2.5, 0.4, D/2+3.5, 2.0, 0.8, 2.0, 0x3a3a3a);
 {
   const cards=[RED,0x2a4a9a,0x2a7a2a,GOLD,0xe86a2a];
   for(let i=0;i<5;i++){
-    const ang=(i-2)*0.3;
-    box(W/2+3.0+Math.sin(ang)*0.8, 1.3+Math.abs(ang)*0.3, D/2+4.0+Math.cos(ang)*0.3, 0.7, 1.0, 0.08, cards[i]);
+    const ang=(i-2)*0.25;
+    box(W/2+2.5+Math.sin(ang)*0.6, 1.0+Math.abs(ang)*0.2, D/2+3.5+Math.cos(ang)*0.25, 0.6, 0.9, 0.06, cards[i]);
   }
 }
 

@@ -220,11 +220,13 @@ function buildVoxelScene(mount, cfg){
     const key = color + JSON.stringify(opts||{});
     // Use MeshBasicMaterial for high-intensity emissive — ignores tone mapping, always full brightness
     if(opts?.emissiveIntensity && opts.emissiveIntensity >= 2.0) {
-      return new THREE.MeshBasicMaterial({
+      const m = new THREE.MeshBasicMaterial({
         color: opts?.emissive ?? color,
         transparent: opts?.transparent ?? false,
         opacity: opts?.opacity ?? 1,
       });
+      m.toneMapped = false;  // Ignore ACES tone mapping — render at full brightness
+      return m;
     }
     if(matCache.has(key)) return matCache.get(key);
     const m = opts?.transmission ? new THREE.MeshPhysicalMaterial({
@@ -588,9 +590,9 @@ paintGlyph(["..###..",".#####.","#######","#######",".#####.","..###.."], -8.70,
 
 
 // Front-facing emissive window panels (at absolute front Z=6.1)
-box(-5.45, 2.75, 6.10, 4.20, 4.00, 0.10, 0xFFC47A, {shadow:false, mat:{emissive:0xFFC47A, emissiveIntensity:3.0}});
-box(-0.55, 2.75, 6.10, 4.10, 4.00, 0.10, 0xFFC47A, {shadow:false, mat:{emissive:0xFFC47A, emissiveIntensity:3.0}});
-box(4.25, 2.75, 6.10, 3.30, 4.00, 0.10, 0xFFC47A, {shadow:false, mat:{emissive:0xFFC47A, emissiveIntensity:3.0}});
+box(-5.45, 2.75, 6.10, 4.20, 4.00, 0.10, 0xFFDDA0, {shadow:false, mat:{emissive:0xFFDDA0, emissiveIntensity:3.0}});
+box(-0.55, 2.75, 6.10, 4.10, 4.00, 0.10, 0xFFDDA0, {shadow:false, mat:{emissive:0xFFDDA0, emissiveIntensity:3.0}});
+box(4.25, 2.75, 6.10, 3.30, 4.00, 0.10, 0xFFDDA0, {shadow:false, mat:{emissive:0xFFDDA0, emissiveIntensity:3.0}});
 
 // ===== STOREFRONT: 5-layer interior =====
 // Sports-card showcase: center (-5.45, 2.75), opening 4.20 W x 4.00 H
@@ -645,7 +647,7 @@ box(4.25, 2.75, 1.50, 3.20, 4.00, 0.15, 0x1a1a1a);
 // Entrance: center (7.05, 2.15), opening 1.70 W x 3.80 H
 box(7.05, 2.15, 5.80, 1.60, 3.60, 0.20, PURPLE);
 
-box(7.05, 2.70, 6.10, 0.90, 1.30, 0.10, 0xFFC47A, {shadow:false, mat:{emissive:0xFFC47A, emissiveIntensity:3.5, transparent:true, opacity:0.5}});
+box(7.05, 2.70, 6.10, 0.90, 1.30, 0.10, 0xFFDDA0, {shadow:false, mat:{emissive:0xFFDDA0, emissiveIntensity:3.5, transparent:true, opacity:0.5}});
 box(7.05, 2.15, 6.45, 1.90, 3.95, 0.15, BLACK);
 box(7.55, 1.90, 5.85, 0.10, 0.50, 0.08, GOLD, {shadow:false});
 
@@ -702,9 +704,9 @@ cfg.rimColor = 0x8B5DCC;
 cfg.rimIntensity = 0.92;
 cfg.exposure = 1.07;
 
-const __light0 = new THREE.PointLight(0xFFC47A, 1.8, 6, 2); __light0.position.set(-5.45, 3.5, 4.0); world.add(__light0);
-const __light1 = new THREE.PointLight(0xFFC47A, 1.8, 6, 2); __light1.position.set(-0.55, 3.5, 4.0); world.add(__light1);
-const __light2 = new THREE.PointLight(0xFFC47A, 1.8, 6, 2); __light2.position.set(4.25, 3.5, 4.0); world.add(__light2);
+const __light0 = new THREE.PointLight(0xFFDDA0, 1.8, 6, 2); __light0.position.set(-5.45, 3.5, 4.0); world.add(__light0);
+const __light1 = new THREE.PointLight(0xFFDDA0, 1.8, 6, 2); __light1.position.set(-0.55, 3.5, 4.0); world.add(__light1);
+const __light2 = new THREE.PointLight(0xFFDDA0, 1.8, 6, 2); __light2.position.set(4.25, 3.5, 4.0); world.add(__light2);
 
      };
      buildVoxelScene(mount, CFG);
